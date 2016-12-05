@@ -275,10 +275,10 @@ inline bool compareSpearman(spearmanRank left, spearmanRank right){
 	return (left.score < right.score);	
 }
 //********************************************************************************************************************
-inline double max(double left, double right){
-    if (left > right) { return left; }
-    else { return right; }
-}
+// inline double max(double left, double right){
+//     if (left > right) { return left; }
+//     else { return right; }
+// }
 //********************************************************************************************************************
 inline double max(int left, double right){
     double value = left;
