@@ -8,5 +8,4 @@
 #define N (2048*2048)
 #define THREADS_PER_BLOCK 512
 
-__global__ void vector_add(int *a, int *b, int *c);
-int parallelize();
+__global__ void find_min(PDistCell *cell, PDistCell *min);

@@ -120,41 +120,24 @@ ull SparseDistanceMatrix::getSmallestCell(ull& row){
 	try {
         if (!sorted) { sortSeqVec(); sorted = true; }
         
-        // cout << "_DEBUG_ | === sorted seqVec === \n";
-        // for (int i = 0; i < seqVec.size(); i++) {
-        //     for (int j = 0; j < seqVec[i].size(); j++) {
-        //         cout << "_DEBUG_ | index: " << seqVec[i][j].index << ", dist: " << seqVec[i][j].dist;
-        //     }   
-        // }
-        // cout << "_DEBUG_ | === end sorted seqVec === \n";
-        parallelize();
+        int rows = seqVec.size();
+        int cols = seqVec[0].size();
+
 
         vector<PDistCellMin> mins;
         smallDist = 1e6;
        
-        for (int i = 0; i < seqVec.size(); i++) {
-            for (int j = 0; j < seqVec[i].size(); j++) {
+        PDistCell* h_seqVec = (PDistCell*)malloc(sizeof(PDistCell));  
+        PDistCell* d_seqVec;  
+        cudaMalloc((void**)&d_seqVec,sizeof(PDistCell));  
+        cudaMemcpy(d_seqVec,h_seqVec,sizeof(PDistCell),cudaMemcpyHostToDevice);  
+        dim3 dimblock(rows,rows);  
+        dim3 dimgrid(cols,cols);  
+        find_min<<<dimgrid,dimblock>>>(seqVec, mins);  
+        cudaMemcpy(a,d_a,sizeof(sizeof(PDistCell)),cudaMemcpyDeviceToHost);    
 
-                if (m->control_pressed) { return smallDist; }
-                
-                //already checked everyone else in row
-                if (i < seqVec[i][j].index) {  
-			    
-                    float dist = seqVec[i][j].dist;
-                  
-                    if(dist < smallDist){  //found a new smallest distance
-                        mins.clear();
-                        smallDist = dist;
-                        PDistCellMin temp(i, seqVec[i][j].index);
-                        mins.push_back(temp);  
-                    }
-                    else if(dist == smallDist){  //if a subsequent distance is the same as mins distance add the new iterator to the mins vector
-                        PDistCellMin temp(i, seqVec[i][j].index);
-                        mins.push_back(temp); 
-                    }
-                }else { j+=seqVec[i].size(); } //stop looking 
-			}
-		}
+        free(h_seqVec);
+        cudaFree( d_seqVec );
         
 		random_shuffle(mins.begin(), mins.end());  //randomize the order of the iterators in the mins vector
         

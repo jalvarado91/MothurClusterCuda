@@ -59,7 +59,19 @@ void Cluster::clusterNames(){
 /***********************************************************************/
 void Cluster::update(double& cutOFF){
 	try {
+		// TIME TEST
+		float elapsedTimeInMs = 0.0f;
+		clock_t time_start = clock();
+		// TIME TEST
+		
         smallCol = dMatrix->getSmallestCell(smallRow);
+
+        // END TIME TEST
+        clock_t time_end = clock();
+		elapsedTimeInMs = (float)((time_end - time_start) * 1000 / CLOCKS_PER_SEC);
+		printf("CPU Time:: %f ms\n ", elapsedTimeInMs);
+		// END TIME TEST
+		
         nColCells = dMatrix->seqVec[smallCol].size();
         nRowCells = dMatrix->seqVec[smallRow].size();
         
