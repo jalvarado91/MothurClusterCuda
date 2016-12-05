@@ -119,12 +119,20 @@ ull SparseDistanceMatrix::getSmallestCell(ull& row){
 	try {
         if (!sorted) { sortSeqVec(); sorted = true; }
         
+        cout << "_DEBUG_ | === sorted seqVec === \n";
+        for (int i = 0; i < seqVec.size(); i++) {
+            for (int j = 0; j < seqVec[i].size(); j++) {
+                cout << "_DEBUG_ | index: " << seqVec[i][j].index << ", dist: " << seqVec[i][j].index;
+            }   
+        }
+        cout << "_DEBUG_ | === end sorted seqVec === \n";
+
         vector<PDistCellMin> mins;
         smallDist = 1e6;
        
         for (int i = 0; i < seqVec.size(); i++) {
             for (int j = 0; j < seqVec[i].size(); j++) {
-                
+
                 if (m->control_pressed) { return smallDist; }
                 
                 //already checked everyone else in row
