@@ -128,7 +128,6 @@ ull SparseDistanceMatrix::getSmallestCell(ull& row){
         // }
         // cout << "_DEBUG_ | === end sorted seqVec === \n";
         parallelize();
-        
 
         vector<PDistCellMin> mins;
         smallDist = 1e6;

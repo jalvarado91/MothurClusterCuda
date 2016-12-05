@@ -21,7 +21,7 @@ void ctrlc_handler ( int sig ) {
 int main(int argc, char *argv[]){
 	MothurOut* m = MothurOut::getInstance();
 
-	string optionString = "column=sogin.unique.filter.dist, names=sogin.names";
+	string optionString = "column=sogin.unique.filter.dist, name=sogin.names";
 	Command* command = new ClusterCommand(optionString);	
 
 	int quitCommandCalled = 0;
