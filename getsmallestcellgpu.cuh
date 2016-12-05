@@ -7,4 +7,4 @@
 #define N (2048*2048)
 #define THREADS_PER_BLOCK 512
 
-__global__ void find_min(PDistCell *cell, PDistCell *min);
+__global__ void find_mininum(PDistCell *cell, PDistCell *min);
