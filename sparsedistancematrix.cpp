@@ -131,13 +131,21 @@ ull SparseDistanceMatrix::getSmallestCell(ull& row){
         PDistCell* d_seqVec;  
         cudaMalloc((void**)&d_seqVec,sizeof(PDistCell));  
         cudaMemcpy(d_seqVec,h_seqVec,sizeof(PDistCell),cudaMemcpyHostToDevice);  
-        dim3 dimblock(rows,rows);  
-        dim3 dimgrid(cols,cols);  
-        find_min<<<dimgrid,dimblock>>>(seqVec, mins);  
-        cudaMemcpy(a,d_a,sizeof(sizeof(PDistCell)),cudaMemcpyDeviceToHost);    
+        dim3 threadsPerBlock(rows, cols); 
+        dim3 numBlocks(rows/threadsPerBlock.x, cols/threadsPerBlock.y);
+        find_mininum<<<numBlocks,threadsPerBlock>>>(seqVec, mins);  
+        cudaMemcpy(a,d_a,sizeof(sizeof(PDistCell)),cudaMemcpyDeviceToHost); 
 
         free(h_seqVec);
         cudaFree( d_seqVec );
+
+        // Get Smallest from mins calculated by GPU
+        PDistCell min = min[0];
+        for (int i = 0; i < mins.size(); i++) {
+            if (min.dist < mins[i].dist) {
+                min = mins[i];
+            }
+        }
         
 		random_shuffle(mins.begin(), mins.end());  //randomize the order of the iterators in the mins vector
         
