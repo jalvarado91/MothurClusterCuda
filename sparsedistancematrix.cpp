@@ -7,8 +7,6 @@
 //
 
 #include "sparsedistancematrix.h"
-#include "getsmallestcellgpu.cuh"
-
 
 /***********************************************************************/
 

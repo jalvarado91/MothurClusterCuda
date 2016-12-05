@@ -60,8 +60,8 @@ void Cluster::clusterNames(){
 /***********************************************************************/
 void Cluster::update(double& cutOFF){
 	try {
-		float timeToFindSmallest;
 		// TIME TEST
+		float elapsedTimeInMs = 0.0f;
 		clock_t time_start = clock();
 		// TIME TEST
 		
