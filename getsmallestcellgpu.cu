@@ -1,7 +1,7 @@
 #include "getsmallestcellgpu.cuh"
 #include <iostream>
 
-__global__ void find_min(PDistCell *secVec, vector<PDistCellMin> *min);
+__global__ void find_min(PDistCell *secVec, vector<PDistCellMin> *min)
 {
     /* insert code to calculate the index properly using blockIdx.x, blockDim.x, threadIdx.x */
 	unsigned int i = blockDim.x * blockIdx.x + threadIdx.x; // Y - ID
