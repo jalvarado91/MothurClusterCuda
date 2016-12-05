@@ -14,3 +14,8 @@ and running the program
 
     $ ./mothurcluster
     
+
+## Branches
+The `master` branch contains the isolated command currently compiling with nvcc. 
+The `paralellize` branch contains an effort to parallelize the `SparseDistanceMatrix::getSmallestCell`.
+The `template` branch is meant to serve as a starting point to develop CUDA and C/C++ content that works together and compiles with nvcc
