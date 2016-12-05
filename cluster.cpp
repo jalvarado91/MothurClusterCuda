@@ -10,6 +10,7 @@
 #include "cluster.hpp"
 #include "rabundvector.hpp"
 #include "listvector.hpp"
+#include <time.h>
 
 /***********************************************************************/
 
@@ -59,7 +60,19 @@ void Cluster::clusterNames(){
 /***********************************************************************/
 void Cluster::update(double& cutOFF){
 	try {
+		float timeToFindSmallest;
+		// TIME TEST
+		clock_t time_start = clock();
+		// TIME TEST
+		
         smallCol = dMatrix->getSmallestCell(smallRow);
+
+        // END TIME TEST
+        clock_t time_end = clock();
+		elapsedTimeInMs = (float)((time_end - time_start) * 1000 / CLOCKS_PER_SEC);
+		printf("\n CPU Time:: %f ms", elapsedTimeInMs);
+		// END TIME TEST
+		
         nColCells = dMatrix->seqVec[smallCol].size();
         nRowCells = dMatrix->seqVec[smallRow].size();
         
