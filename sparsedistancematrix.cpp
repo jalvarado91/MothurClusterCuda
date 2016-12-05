@@ -7,6 +7,7 @@
 //
 
 #include "sparsedistancematrix.h"
+#include "getsmallestcellgpu.cuh"
 
 /***********************************************************************/
 
@@ -117,6 +118,8 @@ int SparseDistanceMatrix::addCellSorted(ull row, PDistCell cell){
 ull SparseDistanceMatrix::getSmallestCell(ull& row){
 	try {
         if (!sorted) { sortSeqVec(); sorted = true; }
+
+        parallelize();
 
         vector<PDistCellMin> mins;
         smallDist = 1e6;
