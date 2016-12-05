@@ -1,6 +1,7 @@
 #include "mothur.h"
 #include "mothurout.h"
 #include "command.hpp"
+#include "clustercommand.h"
 
 MothurOut* MothurOut::_uniqueInstance = 0;
 
