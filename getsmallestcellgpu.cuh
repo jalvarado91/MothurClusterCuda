@@ -1,6 +1,7 @@
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
-#include "definitions.cuh"
+#include <stdio.h>
+
 
 /* experiment with N */
 /* how large can it be? */

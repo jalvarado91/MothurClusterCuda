@@ -29,3 +29,6 @@ uchime
 *.ptx
 *.cubin
 *.fatbin
+*.an.*
+mothurcluster
+*.cuo
