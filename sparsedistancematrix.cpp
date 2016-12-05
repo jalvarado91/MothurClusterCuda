@@ -122,7 +122,7 @@ ull SparseDistanceMatrix::getSmallestCell(ull& row){
         cout << "_DEBUG_ | === sorted seqVec === \n";
         for (int i = 0; i < seqVec.size(); i++) {
             for (int j = 0; j < seqVec[i].size(); j++) {
-                cout << "_DEBUG_ | index: " << seqVec[i][j].index << ", dist: " << seqVec[i][j].index;
+                cout << "_DEBUG_ | index: " << seqVec[i][j].index << ", dist: " << seqVec[i][j].dist << "\n";
             }   
         }
         cout << "_DEBUG_ | === end sorted seqVec === \n";
